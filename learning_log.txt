@@ -1,0 +1,5 @@
+Created a repository on GitHub for my project and linked it to VS Code from Finder.
+On VS Code I created main.py for my Python programming and learning_log.txt to track my learning progression.
+GitHub tracking is now active to save my updates.
+
+
