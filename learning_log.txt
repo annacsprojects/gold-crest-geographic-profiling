@@ -1,5 +1,14 @@
-Created a repository on GitHub for my project and linked it to VS Code from Finder.
-On VS Code I created main.py for my Python programming and learning_log.txt to track my learning progression.
-GitHub tracking is now active to save my updates.
+Learning Log: Gold CREST Project
+Anna Simpson | UTC Portsmouth
 
+Section 1: Learning to program with Python using Kaggle, Hackerrank, and docs.python.org
+[2026-10-08 to 2026-10-15]
+- Learn how to use lists, tuples, dictionaries, and loops using Kaggle Python. 
+- Initially, I tested my incident site coordinates using .imag in order to understand the funamental difference between the .imag attribute and .as_integer_ratio() method. Unlike .as_integer_ratio(), .imag always outputs 0.0 regardless of whether the input is a decimal or an integer. It is used for complex mathematical solutions. Thus, this property is unnecessary to the purpose of my project.
+- I had noticed that my output had 4 long coordinate sets. I had learnt that the first number (numerator) and second number (denominator) inside each coordinate bracket divide each other, and the result of that calculation reconstructs the coordinate of that dataset of the original values.
+- Therefore, in my program I had implemented code that enabled my output to check that my output matched my coordinates.
+- In my research, I had also learnt that when using the == equality operator the output value may not accurately represent the original coordinate because it is caused by floating point precision limitation (similar to how 1/3 becomes a recurring 0.3333 in maths).
+- Whilst learning how to transfer my progress onto GitHub, a glitch occured, deleting my code for practice/kaggle/01_lists_and_loops.py. Fortunately, as a precaution, I had taken screenshots of my code and will rewrite my code. Screenshots can be found in learning/images/01_learning-log_2026-10-14.png and learning/images/01_learning_log_2026-10-14.png. However, upon rewriting my code, this time I will implement dictionaries and for loops to increase the efficiency of building my code and update my objectives with my polished product.
+- Upon evaluation, I had decided that due to the constraint of time and my success learning lists, loops, and dictionaries, I will discontinue the remaining practice modules. Instead, I will pivot to my main program and will learn as I build it, in order to meet the deadline.
 
+Section 2: Gold CREST project developments (main.py)
