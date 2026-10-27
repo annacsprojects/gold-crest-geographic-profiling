@@ -2,7 +2,7 @@ Learning Log: Gold CREST Project
 Anna Simpson | UTC Portsmouth
 
 Section 1: Learning to program with Python using Kaggle, Hackerrank, and docs.python.org
-[2026-10-08 to 2026-10-15]
+[2026-10-08 to 2026-10-19]
 - Learn how to use lists, tuples, dictionaries, and loops using Kaggle Python. 
 - Initially, I tested my incident site coordinates using .imag in order to understand the funamental difference between the .imag attribute and .as_integer_ratio() method. Unlike .as_integer_ratio(), .imag always outputs 0.0 regardless of whether the input is a decimal or an integer. It is used for complex mathematical solutions. Thus, this property is unnecessary to the purpose of my project.
 - I had noticed that my output had 4 long coordinate sets. I had learnt that the first number (numerator) and second number (denominator) inside each coordinate bracket divide each other, and the result of that calculation reconstructs the coordinate of that dataset of the original values.
@@ -12,3 +12,11 @@ Section 1: Learning to program with Python using Kaggle, Hackerrank, and docs.py
 - Upon evaluation, I had decided that due to the constraint of time and my success learning lists, loops, and dictionaries, I will discontinue the remaining practice modules. Instead, I will pivot to my main program and will learn as I build it, in order to meet the deadline.
 
 Section 2: Gold CREST project developments (main.py)
+[2026-10-22]
+- In crime_scenes.csv, from my Notion page, I converted my complex coordinates into simpler, more readable coordinates for my program, using Federal Communications Commission (FCC).
+
+[2026-10-27]
+- I amended my csv file layout and had moved the previous information from it into data/crime_data.txt so that when I import my csv file it is easy for my program to read.
+- I learnt that when I refer to a file, I must name the folder due to how DictReader interprets it as a string when matching dictionary keys.
+- I learnt that using a function definition ('def') in my code enables efficiency later on when I may need to reuse the code without duplication.
+- After coding for function definition, I realised that my code was dormant until I appended a function call to trigger the loop..

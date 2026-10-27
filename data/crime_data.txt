@@ -1,0 +1,47 @@
+"""
+Case: The Railway Rapist
+Incident Site 1: A pathway near Hackney Wick station in North London, heading down to the River Lea, where Alison Day was dumped.
+Incident Site 2: West Horsley in Surrey, Maartje Tamboezer
+Incident Site 3: Brookmans Park railway station, Hertfordshire, Anne Lock
+"""
+#Incident Site 1
+latitude, longitude
+51.543583, -0.022194
+#Incident Site 2
+latitude, longitude
+51.277111, -0.438917
+#Incident Site 3
+latitude, longitude
+51.721333, -0.205111
+
+"""
+Case: The Monster of Florence
+Incident Site 1: Signa, a small town located West Florence, Antonio Lo Bianco and Barbara Locci 
+Incident Site 2: A provincial road in Montespertoli, Paolo Mainardi and Antonella Miglinorini
+Incident Site 3: In a woodland area near San Casciano in Val di Pes, Jean Michel Kraveichvili and Nadine Mauriot
+"""
+#Incident Site 1
+latitude, longitude
+43.794389, 11.082028
+#Incident Site 2
+latitude, longitude
+43.654333, 11.090833
+#Incident Site 3
+latitude, longitude
+43.694417, 11.202083
+
+"""
+Case: The Beltway Snipers
+Incident Site 1: Hillandale Beer & Wine in Silver Spring, Rupinder Oberoi
+Incident Site 2: Three Roads Liquors in Brandywine, Muhammad Rashid
+Incident Site 3: Mobil station in Aspen Hill, Premkumar Walekar
+"""
+#Incident Site 1
+latitude, longitude
+39.021083, -76.975389
+#Incident Site 2
+latitude, longitude
+38.701778, -76.875056
+#Incident Site 3
+latitude, longitude'
+39.074833, -77.135667
