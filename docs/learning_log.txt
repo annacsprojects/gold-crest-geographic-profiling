@@ -19,4 +19,11 @@ Section 2: Gold CREST project developments (main.py)
 - I amended my csv file layout and had moved the previous information from it into data/crime_data.txt so that when I import my csv file it is easy for my program to read.
 - I learnt that when I refer to a file, I must name the folder due to how DictReader interprets it as a string when matching dictionary keys.
 - I learnt that using a function definition ('def') in my code enables efficiency later on when I may need to reuse the code without duplication.
-- After coding for function definition, I realised that my code was dormant until I appended a function call to trigger the loop..
+- After coding for function definition, I realised that my code was dormant until I appended a function call to trigger the loop.
+
+[2026-11-02]
+Notes:
+- Streamlit: This acts as a pinboard for the UI. As a canvas, it enables you to add headings and texts on it.
+- Folium: This software 'pins' the interactive map. It draws the streets and allows users to pin crime scenes and reveal the potential Marauder Base.
+- streamlit-folium: This allows both softwares to become adjacent to each other (Folium acts as the paper as Streamlit acts as a pinboard).
+- pandas: This software acts as a middleman between the code and streamlit-folium features. In this case, it would calculate for the middle point of the coordinates.
