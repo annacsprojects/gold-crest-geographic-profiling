@@ -22,8 +22,16 @@ Section 2: Gold CREST project developments (main.py)
 - After coding for function definition, I realised that my code was dormant until I appended a function call to trigger the loop.
 
 [2026-11-02]
+- Imported software; streamlit, folium. streamlit-folium, and pandas.
+- Created an interactive UI application for Geographic Profiling based on the studied locations.
 Notes:
 - Streamlit: This acts as a pinboard for the UI. As a canvas, it enables you to add headings and texts on it.
 - Folium: This software 'pins' the interactive map. It draws the streets and allows users to pin crime scenes and reveal the potential Marauder Base.
 - streamlit-folium: This allows both softwares to become adjacent to each other (Folium acts as the paper as Streamlit acts as a pinboard).
 - pandas: This software acts as a middleman between the code and streamlit-folium features. In this case, it would calculate for the middle point of the coordinates.
+
+[2026-11-04]
+- Imported scipy and numpy in src/dashboard/engine.py.
+- As well as scipy and numpy, I added calculations for a mean, Centre of Minimum Distance, and Rossmo's decay function.
+- After confirming my previous application that only consisted of geographic profiling and understanding its functions, I had appended a user choice of dashboard in src/dashboard/app.py; choosing commercial locations based on potential customer demand (density of residents in local area) as well as the original geographic profiling model.
+- Updated README.md
