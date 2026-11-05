@@ -1,4 +1,3 @@
-# This file will run the interactive UI map
 import streamlit as st
 import pandas as pd
 import folium
@@ -8,7 +7,9 @@ import engine
 st.set_page_config(layout="wide")
 
 # Creating headers for the web app
-app_mode = st.sidebar.selectbox("Select Your Profiling Map:" ["Forensic Profiling", "Potential Commercial Revenue Locations"])
+app_mode = st.sidebar.selectbox(
+    "Select Your Profiling Map:",
+    ["Forensic Profiling", "Potential Commercial Revenue Locations"])
 
 if app_mode == "Forensic Profiling":
     title = "Geographic Profiling Map"
