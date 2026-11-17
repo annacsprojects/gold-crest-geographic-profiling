@@ -15,7 +15,7 @@ def calculate_cmd(coords):
     # The standard average is used as the first guess
     initial_guess = calculate_centroid(coords)
     # The software minimize continues testing for guesses until the total distance is the shortest possible reached
-    result = minimize (total_distance, initial_guess, method='Nelder Mead')
+    result = minimize (total_distance, initial_guess, method='Nelder-Mead')
     return result.x
 
 # Rossmo's Formula: Here, this function considers a buffer zone, it applies the theory that offenders don't commit crimes directly near their homes, as well as implementing distance decay, where the offender only travels locally to commit crimes, the furthest away they are, the less likely it is that they commit a crime..
@@ -23,14 +23,23 @@ def calculate_simplified_rossmo(coords, buffer_km=1.0, f=1.2, g=1.2):
     latitudes = coords[:, 0]
     longitudes = coords[:, 1]
 
-    # A grid box overlaps the area with 50 rows and 50 columns of the test points.
-    lat_grid = np.linspace(min(latitudes) - 0.1, max(latitudes) + 0.1, 50)
-    lon_grid = np.linspace(min(longitudes) - 0.1, max(longitudes) + 0.1, 50)
+    # Expanding grid slightly so that the heatmap spreads around the base smoothly
+    lat_span = max(latitudes) - min(latitudes)
+    lon_span = max(longitudes) - min(longitudes)
+    max_span = max(lat_span, lon_span, 0.05)
+    pad = max_span * 1.5
 
+    center_lat = (max(latitudes) + min(latitudes)) / 2
+    center_lon = (max(longitudes) + min(longitudes)) / 2
+    
+    # A grid box overlaps the area with 50 rows and 50 columns of the test points.
+    lat_grid = np.linspace(center_lat - pad, center_lat + pad, 70)
+    lon_grid = np.linspace(center_lon - pad, center_lon + pad, 70)
+                           
     best_prob = -1
     best_coord = calculate_centroid(coords)
-
-    buffer_deg = buffer_km / 111.0
+    buffer_deg = buffer_km/111.0
+    heat_data = []
 
     # Check every square on the grid.
     for lat in lat_grid:
@@ -50,39 +59,57 @@ def calculate_simplified_rossmo(coords, buffer_km=1.0, f=1.2, g=1.2):
                     cell_prob += (buffer_deg ** (g - f)) / (2 * buffer_deg)
 
             # Keep the grid coordinate with the highest score.
+            heat_data.append([float(lat), float(lon), float(cell_prob)])
+
             if cell_prob > best_prob:
                 best_prob = cell_prob
                 best_coord = [lat, lon]
 
-    return [best_coord]
+    probs = [row[2] for row in heat_data]
+    min_p, max_p = min(probs), max(probs)
+
+    filtered_heat_data = []
+    if max_p > min_p:
+        for lat, lon, prob in heat_data:
+            norm = (prob - min_p) / (max_p - min_p)
+            if norm > 0.05:
+                filtered_heat_data.append([lat, lon, float(norm)])
+
+    return best_coord, filtered_heat_data
 
 # Circle Theory finds two furthest points and establishes a diameter. Returns true it's a Marauder, False if Commuter.
 # Using exception handling, if an offender has travelled too far out of the radius, instead of breaking the code, the program shows the user an error that the offender is a commuter, not a marauder.
 def run_circle_theory_test(coords):
-    if len(coords) < 3: 
-        return True
+    if len(coords) < 2: 
+        return True, coords, 1000
+
+    lon_scale = np.cos(np.radians(np.mean(coords[:, 0])))
 
     max_dist = 0
-    p1_idx, p2_idx = 0,0
+    p1_idx, p2_idx = 0, 0
 
 # Finding the two furthest points
     for i in range (len(coords)):
-        for j in range(i+1, len(coords)):
-            dist = np.sqrtnp.sum((coords[i] - (coords[j])**2))
+        for j in range(i + 1, len(coords)):
+            dlat = (coords[i][0] - coords[j][0]) * 111000 # 1 degree = 111,000 meters
+            dlon = (coords[i][1]) - coords[j][1] * 111000 * lon_scale
+            dist = np.sqrt(dlat**2 + dlon**2)
             # The two calculated furthest coordinates are treated as the circle diameter
             if dist > max_dist:
                 max_dist = dist
                 p1_idx, p2_idx = i, j
     # Calculating the center and radius of the circle
     center = (coords[p1_idx] + coords[p2_idx]) / 2
-    radius = max_dist / 2
+    radius_meters = max_dist / 2
 
     # Checking if all other points are within the circle radius
     for idx, pt in enumerate(coords):
-        if idx in [p1_idx, p2_idx]:
+        if idx == p1_idx or idx == p2_idx:
             continue 
-        dist_from_center = np.sqrt(np.sum((pt - center)**2))
-        if dist_from_center > radius:
-                return False #If all points fall outside the radius, offender is likely a Commuter.
+        dlat = (pt[0] - center[0]) * 111000
+        dlon = (pt[1]) - center[1] * 111000 * lon_scale
+        dist_from_center = np.sqrt(dlat**2 + dlon**2)
+        if dist_from_center > (radius_meters * 1.02):
+                return False, center, radius_meters #If all points fall outside the radius, offender is likely a Commuter.
 
-    return True # All points are within circle radius, likely to be a Marauder offender
+    return True, center, radius_meters # All points are within circle radius, likely to be a Marauder offender
